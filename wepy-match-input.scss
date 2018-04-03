@@ -1,8 +1,16 @@
 .wepy-match-input{
   position: relative;
 
+  &.disable{
+    background: #eeeeee;
+  }
+
   input{
     padding:0 15rpx;
+
+    &:disabled{
+      background: #999999;
+    }
   }
   &:after{
     content: "";

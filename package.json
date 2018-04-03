@@ -1,6 +1,6 @@
 {
   "name": "wepy-match-input",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "微信小程序 wepyjs 第三方 动态匹配输入框插件",
   "main": "wepy-match-input.wpy",
   "scripts": {

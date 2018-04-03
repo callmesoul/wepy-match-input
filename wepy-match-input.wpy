@@ -1,6 +1,7 @@
 <template>
-  <view class="wepy-match-input">
-    <input type="text" value="{{params.keyWord}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="inputBlur" bindconfirm="inputConfirm" placeholder="{{params.placeholder}}" />
+  <view class="wepy-match-input {{params.disabled?'disable':''}}">
+    <input wx:if="{{!params.disabled}}" disabled type="text"  value="{{params.keyWord}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="inputBlur" bindconfirm="inputConfirm" placeholder="{{params.placeholder}}" />
+    <input wx:else type="text"  value="{{params.keyWord}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="inputBlur" bindconfirm="inputConfirm" placeholder="{{params.placeholder}}" />
     <view class="wepy-match-input-list" wx:if="{{params.matchList.length>0}}">
       <view class="wepy-match-input-item" wx:for="{{params.matchList}}" catchtap="itemTap({{index}})">
         {{item[params.keyName]}}
@@ -20,6 +21,7 @@
           matchList:[],
           keyWord:'',
           keyName:'name',
+          disabled:false,
           tapMatchListItemCallBackFunName:'wepyMatchInputTapCallBack',
           tapInputFocusCallBackFunName:'wepyMatchInputFocusCallBack',
           tapInputChangeCallBackFunName:'wepyMatchInputChangeCallBack',
@@ -93,6 +95,7 @@
       value.matchList=value.matchList?value.matchList:[];
       value.keyWord=value.keyWord?value.keyWord:'';
       value.keyName=value.keyName?value.keyName:'name';
+      value.disabled=value.disabled?value.disabled:false;
       value.tapMatchListItemCallBackFunName=value.tapMatchListItemCallBackFunName?value.tapMatchListItemCallBackFunName:'wepyMatchInputTapCallBack';
       value.tapInputFocusCallBackFunName=value.tapInputFocusCallBackFunName?value.tapInputFocusCallBackFunName:'wepyMatchInputFocusCallBack';
       value.tapInputChangeCallBackFunName=value.tapInputChangeCallBackFunName?value.tapInputChangeCallBackFunName:'wepyMatchInputChangeCallBack';
