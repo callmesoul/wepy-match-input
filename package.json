@@ -1,0 +1,22 @@
+{
+  "name": "wepy-match-input",
+  "version": "0.0.1",
+  "description": "微信小程序 wepyjs 第三方 动态匹配输入框插件",
+  "main": "wepy-match-input.wpy",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/callmesoul/wepy-nices"
+  },
+  "author": "callmesoul",
+  "license": "MIT",
+  "devDependencies": {
+    "babel": "^6.5.2",
+    "babel-cli": "^6.18.0",
+    "babel-preset-es2015": "^6.18.0",
+    "babel-preset-stage-1": "^6.16.0",
+    "babel-preset-stage-1": "^6.16.0"
+  }
+}

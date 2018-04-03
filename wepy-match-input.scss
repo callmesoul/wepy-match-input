@@ -1,0 +1,45 @@
+.wepy-match-input{
+  position: relative;
+
+  input{
+    padding:0 15rpx;
+  }
+  &:after{
+    content: "";
+    width: 100%;
+    height: 100%;
+    border:1rpx solid #999;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  .wepy-match-input-list{
+    position:absolute;
+    width:100%;
+    left:0;
+    top:0;
+    z-index:8;
+    margin-top:55rpx;
+    background: #f9f9f9;
+    border:1rpx solid #999;
+
+    .wepy-match-input-item{
+      display:block;
+      height:1.4rem;
+      text-overflow:clip;
+      overflow:hidden;
+      white-space:nowrap;
+      font-family:UICTFontTextStyleBody;
+      min-height:1.4rem;
+      border-bottom: 1rpx solid #999999;
+      padding:0 15rpx;
+      line-height:1.4rem;
+
+      &:last-child{
+        border-bottom: 0;
+      }
+    }
+  }
+}

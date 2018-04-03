@@ -1,0 +1,105 @@
+<template>
+  <view class="wepy-match-input">
+    <input type="text" value="{{params.keyWord}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="inputBlur" bindconfirm="inputConfirm" placeholder="{{params.placeholder}}" />
+    <view class="wepy-match-input-list" wx:if="{{params.matchList.length>0}}">
+      <view class="wepy-match-input-item" wx:for="{{params.matchList}}" catchtap="itemTap({{index}})">
+        {{item[params.keyName]}}
+      </view>
+    </view>
+  </view>
+</template>
+<script>
+  import wepy from 'wepy'
+
+  export default class MyPage extends wepy.component {
+
+    props = {
+      params:{
+        type:Object,
+        default:{
+          matchList:[],
+          keyWord:'',
+          keyName:'name',
+          tapMatchListItemCallBackFunName:'wepyMatchInputTapCallBack',
+          tapInputFocusCallBackFunName:'wepyMatchInputFocusCallBack',
+          tapInputChangeCallBackFunName:'wepyMatchInputChangeCallBack',
+          tapInputBlurCallBackFunName:'wepyMatchInputBlurCallBack',
+          tapInputConfirmCallBackFunName:'wepyMatchInputConfirmCallBack',
+          placeholder:'',
+        },
+        twoWay: true
+      }
+    }
+    customData = {}  // 自定义数据
+
+    customFunction() {
+    }  // 自定义方法
+
+    onLoad() {
+
+      this.setDefaultValue(this.params)
+    }  // 在Page和Component共用的生命周期函数
+
+    onShow() {
+    }  // 只在Page中存在的页面生命周期函数
+
+    config = {};  // 只在Page实例中存在的配置数据，对应于原生的page.json文件
+
+    data = {};  // 页面所需数据均需在这里声明，可用于模板数据绑定
+
+    components = {};  // 声明页面中所引用的组件，或声明组件中所引用的子组件
+
+    mixins = [];  // 声明页面所引用的Mixin实例
+
+    computed = {};  // 声明计算属性（详见后文介绍）
+
+    watch = {
+      params (newValue, oldValue) {
+        this.setDefaultValue(newValue);
+      }
+    };  // 声明数据watcher（详见后文介绍）
+    methods = {
+      itemTap:function (index) {
+        debugger;
+        let data=this.params.matchList[index];
+        this.$emit(this.params.tapMatchListItemCallBackFunName, data,index);
+        this.params.matchList=[];
+      },
+      inputChange:function (e) {
+        let value=e.detail.value;
+        this.params.keyWord=value;
+        this.$emit(this.params.tapInputChangeCallBackFunName,value);
+        this.params.matchList=[];
+      },
+      inputFocus:function (e) {
+        let value=e.detail.value;
+        this.$emit(this.params.tapInputFocusCallBackFunName,value);
+        this.params.matchList=[];
+      },
+      inputBlur:function (e) {
+        let value=e.detail.value;
+        this.$emit(this.params.tapInputConfirmCallBackFunName,value);
+      },
+      bindconfirm:function (e) {
+        let value=e.detail.value;
+        this.$emit(this.params.tapInputBlurCallBackFunName,value);
+        this.params.matchList=[];
+      }
+    };  // 声明页面wxml中标签的事件处理函数。注意，此处只用于声明页面wxml中标签的bind、catch事件，自定义方法需以自定义方法的方式声明
+
+    events = {};  // 声明组件之间的事件处理函数
+
+    setDefaultValue(value){
+      value.matchList=value.matchList?value.matchList:[];
+      value.keyWord=value.keyWord?value.keyWord:'';
+      value.keyName=value.keyName?value.keyName:'name';
+      value.tapMatchListItemCallBackFunName=value.tapMatchListItemCallBackFunName?value.tapMatchListItemCallBackFunName:'wepyMatchInputTapCallBack';
+      value.tapInputFocusCallBackFunName=value.tapInputFocusCallBackFunName?value.tapInputFocusCallBackFunName:'wepyMatchInputFocusCallBack';
+      value.tapInputChangeCallBackFunName=value.tapInputChangeCallBackFunName?value.tapInputChangeCallBackFunName:'wepyMatchInputChangeCallBack';
+      value.tapInputBlurCallBackFunName=value.tapInputBlurCallBackFunName?value.tapInputBlurCallBackFunName:'wepyMatchInputBlurCallBack';
+      value.tapInputConfirmCallBackFunName=value.tapInputConfirmCallBackFunName?value.tapInputConfirmCallBackFunName:'wepyMatchInputConfirmCallBack';
+      value.placeholder=value.placeholder?value.placeholder:'';
+    }
+  }
+</script>
+<style lang="scss" src="wepy-match-input.scss"></style>
