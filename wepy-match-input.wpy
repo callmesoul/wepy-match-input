@@ -1,7 +1,6 @@
 <template>
   <view class="wepy-match-input {{params.disabled?'disable':''}}">
-    <input wx:if="{{!params.disabled}}" disabled type="text"  value="{{params.keyWord}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="inputBlur" bindconfirm="inputConfirm" placeholder="{{params.placeholder}}" />
-    <input wx:else type="text"  value="{{params.keyWord}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="inputBlur" bindconfirm="inputConfirm" placeholder="{{params.placeholder}}" />
+    <input disabled="{{params.disabled?'true':false}}" type="text"  value="{{params.keyWord}}" bindinput="inputChange" bindfocus="inputFocus" bindblur="inputBlur" bindconfirm="inputConfirm" placeholder="{{params.placeholder}}" />
     <view class="wepy-match-input-list" wx:if="{{params.matchList.length>0}}">
       <view class="wepy-match-input-item" wx:for="{{params.matchList}}" catchtap="itemTap({{index}})">
         {{item[params.keyName]}}
@@ -62,21 +61,21 @@
     };  // 声明数据watcher（详见后文介绍）
     methods = {
       itemTap:function (index) {
-        debugger;
         let data=this.params.matchList[index];
-        this.$emit(this.params.tapMatchListItemCallBackFunName, data,index);
         this.params.matchList=[];
+        this.$emit(this.params.tapMatchListItemCallBackFunName, data,index);
       },
       inputChange:function (e) {
         let value=e.detail.value;
         this.params.keyWord=value;
-        this.$emit(this.params.tapInputChangeCallBackFunName,value);
         this.params.matchList=[];
+        this.$emit(this.params.tapInputChangeCallBackFunName,value);
       },
       inputFocus:function (e) {
         let value=e.detail.value;
-        this.$emit(this.params.tapInputFocusCallBackFunName,value);
         this.params.matchList=[];
+        this.$emit(this.params.tapInputFocusCallBackFunName,value);
+
       },
       inputBlur:function (e) {
         let value=e.detail.value;
@@ -84,8 +83,8 @@
       },
       bindconfirm:function (e) {
         let value=e.detail.value;
-        this.$emit(this.params.tapInputBlurCallBackFunName,value);
         this.params.matchList=[];
+        this.$emit(this.params.tapInputBlurCallBackFunName,value);
       }
     };  // 声明页面wxml中标签的事件处理函数。注意，此处只用于声明页面wxml中标签的bind、catch事件，自定义方法需以自定义方法的方式声明
 
